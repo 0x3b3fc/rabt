@@ -91,28 +91,30 @@ export default async function UnitsPage({
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>اسم الوحدة</TableHead>
-                    <TableHead>المحافظة</TableHead>
-                    <TableHead>الهاتف</TableHead>
-                    <TableHead>واتساب</TableHead>
-                    <TableHead>الأعضاء</TableHead>
-                    <TableHead>الحالة</TableHead>
-                    <TableHead className="w-[100px]">إجراءات</TableHead>
+                    <TableHead className="whitespace-nowrap">اسم الوحدة</TableHead>
+                    <TableHead className="whitespace-nowrap">المحافظة</TableHead>
+                    <TableHead className="whitespace-nowrap">الهاتف</TableHead>
+                    <TableHead className="whitespace-nowrap">واتساب</TableHead>
+                    <TableHead className="whitespace-nowrap">الأعضاء</TableHead>
+                    <TableHead className="whitespace-nowrap">الحالة</TableHead>
+                    <TableHead className="whitespace-nowrap w-[70px]">إجراءات</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {units.map((unit) => (
                     <TableRow key={unit.id}>
                       <TableCell>
-                        <div>
+                        <div className="min-w-[150px]">
                           <p className="font-medium">{unit.name}</p>
                           {unit.address && (
                             <p className="text-sm text-muted-foreground">{unit.address}</p>
                           )}
                         </div>
                       </TableCell>
-                      <TableCell>{unit.governorate?.name || '-'}</TableCell>
-                      <TableCell dir="ltr">{unit.phone || '-'}</TableCell>
+                      <TableCell className="whitespace-nowrap">{unit.governorate?.name || '-'}</TableCell>
+                      <TableCell className="whitespace-nowrap">
+                        <span dir="ltr">{unit.phone || '-'}</span>
+                      </TableCell>
                       <TableCell>
                         {unit.whatsappLink ? (
                           <a
@@ -127,7 +129,7 @@ export default async function UnitsPage({
                           '-'
                         )}
                       </TableCell>
-                      <TableCell>{unit._count.users}</TableCell>
+                      <TableCell className="whitespace-nowrap">{unit._count.users}</TableCell>
                       <TableCell>
                         <Badge variant={unit.isActive ? 'default' : 'secondary'}>
                           {unit.isActive ? 'نشط' : 'غير نشط'}
