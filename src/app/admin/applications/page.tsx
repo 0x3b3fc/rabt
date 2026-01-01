@@ -3,7 +3,6 @@ import { getGovernorates } from '@/actions/governorate.actions'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   Select,
   SelectContent,
@@ -11,11 +10,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 import { StatusBadge } from '@/components/shared/status-badge'
 import Link from 'next/link'
 import { format } from 'date-fns'
 import { ar } from 'date-fns/locale'
-import { Eye, Search, ChevronLeft, ChevronRight, User, Phone, MapPin, Calendar, Download } from 'lucide-react'
+import { Eye, Search, ChevronLeft, ChevronRight, Download } from 'lucide-react'
 
 interface SearchParams {
   status?: string
@@ -137,62 +144,50 @@ export default async function ApplicationsPage({
             </p>
           ) : (
             <>
-              <div className="grid gap-4">
-                {applications.map((app) => (
-                  <div
-                    key={app.id}
-                    className="flex flex-col sm:flex-row gap-4 p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
-                  >
-                    {/* Photo */}
-                    <div className="flex-shrink-0">
-                      <Avatar className="h-16 w-16 sm:h-20 sm:w-20">
-                        <AvatarImage src={app.photoUrl || undefined} alt={app.fullName} />
-                        <AvatarFallback>
-                          <User className="h-8 w-8" />
-                        </AvatarFallback>
-                      </Avatar>
-                    </div>
-
-                    {/* Info */}
-                    <div className="flex-1 min-w-0 space-y-2">
-                      <div className="flex flex-wrap items-start justify-between gap-2">
-                        <div>
-                          <h3 className="font-semibold text-lg truncate">{app.fullName}</h3>
-                          <p className="text-sm text-muted-foreground">{app.user.email}</p>
-                        </div>
-                        <StatusBadge status={app.status} />
-                      </div>
-
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
-                        <div className="flex items-center gap-1.5 text-muted-foreground">
+              <div className="rounded-md border overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>الاسم</TableHead>
+                      <TableHead>الرقم القومي</TableHead>
+                      <TableHead>الهاتف</TableHead>
+                      <TableHead>المحافظة</TableHead>
+                      <TableHead>تاريخ التقديم</TableHead>
+                      <TableHead>الحالة</TableHead>
+                      <TableHead className="w-[80px]">إجراءات</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {applications.map((app) => (
+                      <TableRow key={app.id}>
+                        <TableCell>
+                          <div>
+                            <p className="font-medium">{app.fullName}</p>
+                            <p className="text-sm text-muted-foreground">{app.user.email}</p>
+                          </div>
+                        </TableCell>
+                        <TableCell>
                           <span className="font-mono" dir="ltr">{app.nationalId}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-muted-foreground">
-                          <Phone className="h-3.5 w-3.5" />
-                          <span dir="ltr">{app.phone || '-'}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-muted-foreground">
-                          <MapPin className="h-3.5 w-3.5" />
-                          <span>{app.governorate.name}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-muted-foreground">
-                          <Calendar className="h-3.5 w-3.5" />
-                          <span>{format(new Date(app.submittedAt), 'dd/MM/yyyy', { locale: ar })}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Action */}
-                    <div className="flex-shrink-0 self-center">
-                      <Button asChild variant="outline" size="sm">
-                        <Link href={`/admin/applications/${app.id}`}>
-                          <Eye className="h-4 w-4 ms-2" />
-                          عرض
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+                        </TableCell>
+                        <TableCell dir="ltr">{app.phone || '-'}</TableCell>
+                        <TableCell>{app.governorate.name}</TableCell>
+                        <TableCell>
+                          {format(new Date(app.submittedAt), 'dd/MM/yyyy', { locale: ar })}
+                        </TableCell>
+                        <TableCell>
+                          <StatusBadge status={app.status} />
+                        </TableCell>
+                        <TableCell>
+                          <Button asChild variant="ghost" size="icon">
+                            <Link href={`/admin/applications/${app.id}`}>
+                              <Eye className="h-4 w-4" />
+                            </Link>
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
               </div>
 
               {/* Pagination */}
