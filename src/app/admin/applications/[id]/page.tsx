@@ -177,6 +177,7 @@ export default async function ApplicationDetailPage({
             currentUnitId={application.assignedUnitId}
             currentNote={application.adminNote}
             units={units}
+            governorateName={application.governorate.name}
           />
         </div>
       </div>

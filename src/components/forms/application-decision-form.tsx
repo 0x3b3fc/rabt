@@ -24,6 +24,7 @@ interface ApplicationDecisionFormProps {
   currentUnitId: string | null
   currentNote: string | null
   units: Array<{ id: string; name: string }>
+  governorateName: string
 }
 
 export function ApplicationDecisionForm({
@@ -32,6 +33,7 @@ export function ApplicationDecisionForm({
   currentUnitId,
   currentNote,
   units,
+  governorateName,
 }: ApplicationDecisionFormProps) {
   const [status, setStatus] = useState<'ACCEPTED' | 'REJECTED' | ''>('')
   const [unitId, setUnitId] = useState(currentUnitId || '')
@@ -120,7 +122,7 @@ export function ApplicationDecisionForm({
 
         {status === 'ACCEPTED' && (
           <div className="space-y-2">
-            <Label>الوحدة *</Label>
+            <Label>الوحدة * (محافظة {governorateName})</Label>
             <Select value={unitId} onValueChange={setUnitId} disabled={isSubmitting}>
               <SelectTrigger>
                 <SelectValue placeholder="اختر الوحدة" />
@@ -128,7 +130,7 @@ export function ApplicationDecisionForm({
               <SelectContent>
                 {units.length === 0 ? (
                   <SelectItem value="none" disabled>
-                    لا توجد وحدات في هذه المحافظة
+                    لا توجد وحدات في محافظة {governorateName}
                   </SelectItem>
                 ) : (
                   units.map((unit) => (

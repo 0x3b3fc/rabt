@@ -58,10 +58,22 @@ export function UnitDialog({ children, governorates, unit }: UnitDialogProps) {
 
   const handleSubmit = async () => {
     setError(null)
+
+    // Validate required fields
+    if (!governorateId) {
+      setError('يجب اختيار المحافظة')
+      return
+    }
+
+    if (!name.trim()) {
+      setError('يجب إدخال اسم الوحدة')
+      return
+    }
+
     setIsSubmitting(true)
 
     const data = {
-      name,
+      name: name.trim(),
       governorateId,
       whatsappLink: whatsappLink || undefined,
       address: address || undefined,
