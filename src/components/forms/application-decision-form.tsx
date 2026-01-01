@@ -55,22 +55,27 @@ export function ApplicationDecisionForm({
     setError(null)
     setIsSubmitting(true)
 
-    const result = await decideApplication({
-      applicationId,
-      status,
-      assignedUnitId: status === 'ACCEPTED' ? unitId : undefined,
-      adminNote: note || undefined,
-    })
-
-    if (result.error) {
-      setError(result.error)
-      setIsSubmitting(false)
-    } else {
-      toast({
-        title: 'تم حفظ القرار',
-        description: status === 'ACCEPTED' ? 'تم قبول الطلب بنجاح' : 'تم رفض الطلب',
+    try {
+      const result = await decideApplication({
+        applicationId,
+        status,
+        assignedUnitId: status === 'ACCEPTED' ? unitId : undefined,
+        adminNote: note || undefined,
       })
-      router.refresh()
+
+      if (result.error) {
+        setError(result.error)
+      } else {
+        toast({
+          title: 'تم حفظ القرار',
+          description: status === 'ACCEPTED' ? 'تم قبول الطلب بنجاح' : 'تم رفض الطلب',
+        })
+        router.refresh()
+      }
+    } catch {
+      setError('حدث خطأ أثناء حفظ القرار')
+    } finally {
+      setIsSubmitting(false)
     }
   }
 

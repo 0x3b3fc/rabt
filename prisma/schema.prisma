@@ -71,7 +71,7 @@ model Application {
   governorate        Governorate       @relation(fields: [governorateId], references: [id])
   fullName           String
   nationalId         String            @unique
-  phone              String
+  phone              String?
   birthDate          DateTime
   education          String
   address            String
