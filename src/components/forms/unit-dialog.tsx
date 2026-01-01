@@ -102,10 +102,19 @@ export function UnitDialog({ children, governorates, unit }: UnitDialogProps) {
       setPhone('')
       setIsActive(true)
     }
+    setError(null)
+    setIsSubmitting(false)
+  }
+
+  const handleOpenChange = (newOpen: boolean) => {
+    setOpen(newOpen)
+    if (newOpen) {
+      resetForm()
+    }
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-md">
         <DialogHeader>

@@ -57,14 +57,29 @@ export function GovernorateDialog({ children, governorate }: GovernorateDialogPr
         description: isEditing ? 'تم تحديث المحافظة بنجاح' : 'تم إضافة المحافظة بنجاح',
       })
       setOpen(false)
-      setName('')
-      setIsActive(true)
+      resetForm()
       router.refresh()
     }
   }
 
+  const resetForm = () => {
+    if (!isEditing) {
+      setName('')
+      setIsActive(true)
+    }
+    setError(null)
+    setIsSubmitting(false)
+  }
+
+  const handleOpenChange = (newOpen: boolean) => {
+    setOpen(newOpen)
+    if (newOpen) {
+      resetForm()
+    }
+  }
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
