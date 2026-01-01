@@ -6,6 +6,9 @@ const arabicNameRegex = /^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\s]+$/
 // National ID: exactly 14 digits
 const nationalIdRegex = /^\d{14}$/
 
+// Egyptian phone number: starts with 01 and has 11 digits
+const phoneRegex = /^01[0125]\d{8}$/
+
 export const applicationSchema = z.object({
   governorateId: z.string().min(1, { message: 'المحافظة مطلوبة' }),
   fullName: z
@@ -25,6 +28,10 @@ export const applicationSchema = z.object({
     .string()
     .min(1, { message: 'الرقم القومي مطلوب' })
     .regex(nationalIdRegex, { message: 'الرقم القومي يجب أن يكون 14 رقماً بالضبط' }),
+  phone: z
+    .string()
+    .min(1, { message: 'رقم الهاتف مطلوب' })
+    .regex(phoneRegex, { message: 'رقم الهاتف يجب أن يكون رقم مصري صحيح (01xxxxxxxxx)' }),
   birthDate: z
     .string()
     .min(1, { message: 'تاريخ الميلاد مطلوب' })
@@ -55,6 +62,7 @@ export const applicationSchema = z.object({
     .min(10, { message: 'العنوان يجب أن يكون 10 أحرف على الأقل' })
     .max(200, { message: 'العنوان يجب ألا يتجاوز 200 حرف' }),
   photoUrl: z.string().min(1, { message: 'الصورة الشخصية مطلوبة' }),
+  nationalIdPhotoUrl: z.string().min(1, { message: 'صورة البطاقة مطلوبة' }),
 })
 
 export const applicationDecisionSchema = z

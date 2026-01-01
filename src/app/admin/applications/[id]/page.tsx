@@ -3,14 +3,14 @@ import { getApplicationById } from '@/actions/application.actions'
 import { getAllUnits } from '@/actions/unit.actions'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
 import { StatusBadge } from '@/components/shared/status-badge'
 import { ApplicationDecisionForm } from '@/components/forms/application-decision-form'
 import Link from 'next/link'
 import { format } from 'date-fns'
 import { ar } from 'date-fns/locale'
-import { ArrowRight, User, Mail, Phone, Calendar, MapPin, GraduationCap, Home } from 'lucide-react'
+import { ArrowRight, User, Mail, Phone, Calendar, MapPin, GraduationCap, Home, CreditCard } from 'lucide-react'
+import Image from 'next/image'
 
 export default async function ApplicationDetailPage({
   params,
@@ -59,17 +59,50 @@ export default async function ApplicationDetailPage({
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="flex items-center gap-4">
-                <Avatar className="h-24 w-24">
-                  <AvatarImage src={application.photoUrl || undefined} alt={application.fullName} />
-                  <AvatarFallback>
-                    <User className="h-10 w-10" />
-                  </AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="text-xl font-bold">{application.fullName}</p>
-                  <p className="text-muted-foreground" dir="ltr">{application.nationalId}</p>
+              {/* Photos Section */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="text-center">
+                  <p className="text-sm text-muted-foreground mb-2">الصورة الشخصية</p>
+                  <div className="relative mx-auto w-32 h-32 rounded-lg overflow-hidden border bg-muted">
+                    {application.photoUrl ? (
+                      <Image
+                        src={application.photoUrl}
+                        alt={application.fullName}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center h-full">
+                        <User className="h-12 w-12 text-muted-foreground" />
+                      </div>
+                    )}
+                  </div>
                 </div>
+                <div className="text-center">
+                  <p className="text-sm text-muted-foreground mb-2">صورة البطاقة</p>
+                  <div className="relative mx-auto w-48 h-32 rounded-lg overflow-hidden border bg-muted">
+                    {application.nationalIdPhotoUrl ? (
+                      <Image
+                        src={application.nationalIdPhotoUrl}
+                        alt="البطاقة الشخصية"
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center h-full">
+                        <CreditCard className="h-12 w-12 text-muted-foreground" />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <Separator />
+
+              {/* Name and ID */}
+              <div>
+                <h3 className="text-xl font-bold">{application.fullName}</h3>
+                <p className="text-muted-foreground font-mono" dir="ltr">{application.nationalId}</p>
               </div>
 
               <Separator />
@@ -83,15 +116,13 @@ export default async function ApplicationDetailPage({
                   </div>
                 </div>
 
-                {application.user.phone && (
-                  <div className="flex items-center gap-3">
-                    <Phone className="h-4 w-4 text-muted-foreground" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">الهاتف</p>
-                      <p className="font-medium" dir="ltr">{application.user.phone}</p>
-                    </div>
+                <div className="flex items-center gap-3">
+                  <Phone className="h-4 w-4 text-muted-foreground" />
+                  <div>
+                    <p className="text-sm text-muted-foreground">رقم الهاتف</p>
+                    <p className="font-medium" dir="ltr">{application.phone}</p>
                   </div>
-                )}
+                </div>
 
                 <div className="flex items-center gap-3">
                   <Calendar className="h-4 w-4 text-muted-foreground" />

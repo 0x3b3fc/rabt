@@ -49,10 +49,12 @@ export async function submitApplication(data: ApplicationInput) {
       governorateId: validatedFields.data.governorateId,
       fullName: validatedFields.data.fullName,
       nationalId: validatedFields.data.nationalId,
+      phone: validatedFields.data.phone,
       birthDate: new Date(validatedFields.data.birthDate),
       education: validatedFields.data.education,
       address: validatedFields.data.address,
       photoUrl: validatedFields.data.photoUrl,
+      nationalIdPhotoUrl: validatedFields.data.nationalIdPhotoUrl,
     },
   })
 

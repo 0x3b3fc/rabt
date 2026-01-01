@@ -64,25 +64,27 @@ model Unit {
 }
 
 model Application {
-  id             String            @id @default(cuid())
-  userId         String            @unique
-  user           User              @relation(fields: [userId], references: [id], onDelete: Cascade)
-  governorateId  String
-  governorate    Governorate       @relation(fields: [governorateId], references: [id])
-  fullName       String
-  nationalId     String            @unique
-  birthDate      DateTime
-  education      String
-  address        String
-  status         ApplicationStatus @default(PENDING)
-  assignedUnitId String?
-  assignedUnit   Unit?             @relation("AssignedUnit", fields: [assignedUnitId], references: [id])
-  adminNote      String?
-  photoUrl       String?
-  submittedAt    DateTime          @default(now())
-  decidedAt      DateTime?
-  createdAt      DateTime          @default(now())
-  updatedAt      DateTime          @updatedAt
+  id                 String            @id @default(cuid())
+  userId             String            @unique
+  user               User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  governorateId      String
+  governorate        Governorate       @relation(fields: [governorateId], references: [id])
+  fullName           String
+  nationalId         String            @unique
+  phone              String
+  birthDate          DateTime
+  education          String
+  address            String
+  status             ApplicationStatus @default(PENDING)
+  assignedUnitId     String?
+  assignedUnit       Unit?             @relation("AssignedUnit", fields: [assignedUnitId], references: [id])
+  adminNote          String?
+  photoUrl           String?
+  nationalIdPhotoUrl String?
+  submittedAt        DateTime          @default(now())
+  decidedAt          DateTime?
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
 
   @@map("applications")
 }

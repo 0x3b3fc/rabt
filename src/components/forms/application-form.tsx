@@ -47,10 +47,12 @@ export function ApplicationForm({ governorates }: ApplicationFormProps) {
       governorateId: '',
       fullName: '',
       nationalId: '',
+      phone: '',
       birthDate: '',
       education: '',
       address: '',
       photoUrl: '',
+      nationalIdPhotoUrl: '',
     },
   })
 
@@ -88,23 +90,45 @@ export function ApplicationForm({ governorates }: ApplicationFormProps) {
               </Alert>
             )}
 
-            <FormField
-              control={form.control}
-              name="photoUrl"
-              render={({ field }) => (
-                <FormItem className="flex flex-col items-center">
-                  <FormLabel>الصورة الشخصية *</FormLabel>
-                  <FormControl>
-                    <ImageUpload
-                      value={field.value}
-                      onChange={field.onChange}
-                      disabled={isSubmitting}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid gap-6 md:grid-cols-2">
+              <FormField
+                control={form.control}
+                name="photoUrl"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col items-center">
+                    <FormLabel>الصورة الشخصية *</FormLabel>
+                    <FormControl>
+                      <ImageUpload
+                        value={field.value}
+                        onChange={field.onChange}
+                        disabled={isSubmitting}
+                      />
+                    </FormControl>
+                    <FormDescription>صورة شخصية واضحة</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="nationalIdPhotoUrl"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col items-center">
+                    <FormLabel>صورة البطاقة الشخصية *</FormLabel>
+                    <FormControl>
+                      <ImageUpload
+                        value={field.value}
+                        onChange={field.onChange}
+                        disabled={isSubmitting}
+                      />
+                    </FormControl>
+                    <FormDescription>صورة واضحة للبطاقة</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <div className="grid gap-4 md:grid-cols-2">
               <FormField
@@ -138,11 +162,33 @@ export function ApplicationForm({ governorates }: ApplicationFormProps) {
                       <Input
                         placeholder="29901011234567"
                         maxLength={14}
+                        dir="ltr"
                         disabled={isSubmitting}
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>14 رقماً</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>رقم الهاتف *</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="01012345678"
+                        maxLength={11}
+                        dir="ltr"
+                        disabled={isSubmitting}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>رقم هاتف مصري</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
