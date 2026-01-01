@@ -93,7 +93,7 @@ export default async function UsersPage({
             </p>
           ) : (
             <>
-              <div className="rounded-md border">
+              <div className="rounded-md border overflow-x-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
@@ -101,7 +101,7 @@ export default async function UsersPage({
                       <TableHead>تاريخ التسجيل</TableHead>
                       <TableHead>حالة الطلب</TableHead>
                       <TableHead>الوحدة</TableHead>
-                      <TableHead className="w-[100px]">إجراءات</TableHead>
+                      <TableHead className="w-[80px]">إجراءات</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
