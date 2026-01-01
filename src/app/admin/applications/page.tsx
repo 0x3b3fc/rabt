@@ -169,7 +169,9 @@ export default async function ApplicationsPage({
                         <TableCell className="whitespace-nowrap">
                           <span className="font-mono" dir="ltr">{app.nationalId}</span>
                         </TableCell>
-                        <TableCell className="whitespace-nowrap" dir="ltr">{app.phone || '-'}</TableCell>
+                        <TableCell className="whitespace-nowrap">
+                          <span dir="ltr">{app.phone || '-'}</span>
+                        </TableCell>
                         <TableCell className="whitespace-nowrap">{app.governorate.name}</TableCell>
                         <TableCell className="whitespace-nowrap">
                           {format(new Date(app.submittedAt), 'dd/MM/yyyy', { locale: ar })}
