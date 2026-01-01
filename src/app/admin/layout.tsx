@@ -22,7 +22,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       <AdminSidebar siteName={siteName} />
       <div className="flex-1 flex flex-col">
         <AdminHeader user={session.user} siteName={siteName} />
-        <main className="flex-1 p-4 lg:p-6 bg-muted/30">{children}</main>
+        <main className="flex-1 p-3 sm:p-4 lg:p-6 bg-muted/30">{children}</main>
       </div>
     </div>
   )

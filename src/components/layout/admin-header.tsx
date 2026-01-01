@@ -50,22 +50,22 @@ export function AdminHeader({ user, siteName = 'وحدة الربط المركز
   }
 
   return (
-    <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b bg-card px-4 lg:px-6">
-      <div className="flex items-center gap-4">
+    <header className="sticky top-0 z-50 flex h-14 sm:h-16 items-center justify-between border-b bg-card px-3 sm:px-4 lg:px-6">
+      <div className="flex items-center gap-2 sm:gap-4">
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="lg:hidden">
+            <Button variant="ghost" size="icon" className="lg:hidden h-9 w-9 sm:h-10 sm:w-10">
               <Menu className="h-5 w-5" />
               <span className="sr-only">القائمة</span>
             </Button>
           </SheetTrigger>
           <SheetContent side="right" className="w-64 p-0">
-            <div className="flex h-16 items-center border-b px-6">
+            <div className="flex h-14 sm:h-16 items-center border-b px-4 sm:px-6">
               <Link href="/admin/dashboard" className="flex items-center gap-2">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                   <Building2 className="h-5 w-5" />
                 </div>
-                <span className="font-bold">{siteName}</span>
+                <span className="font-bold text-sm sm:text-base truncate max-w-[150px]">{siteName}</span>
               </Link>
             </div>
             <nav className="space-y-1 p-4">
@@ -90,15 +90,15 @@ export function AdminHeader({ user, siteName = 'وحدة الربط المركز
             </nav>
           </SheetContent>
         </Sheet>
-        <h1 className="text-lg font-semibold lg:hidden">{siteName}</h1>
+        <h1 className="text-sm sm:text-lg font-semibold lg:hidden truncate max-w-[120px] sm:max-w-[180px]">{siteName}</h1>
       </div>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-            <Avatar className="h-10 w-10">
+          <Button variant="ghost" className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-full">
+            <Avatar className="h-9 w-9 sm:h-10 sm:w-10">
               <AvatarFallback>
-                <User className="h-5 w-5" />
+                <User className="h-4 w-4 sm:h-5 sm:w-5" />
               </AvatarFallback>
             </Avatar>
           </Button>

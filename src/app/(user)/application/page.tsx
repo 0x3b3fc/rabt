@@ -6,6 +6,7 @@ import { StatusBadge } from '@/components/shared/status-badge'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
+import { Badge } from '@/components/ui/badge'
 import { Clock, CheckCircle, XCircle, User, MapPin, Building2, MessageCircle } from 'lucide-react'
 import { format } from 'date-fns'
 import { ar } from 'date-fns/locale'
@@ -180,6 +181,23 @@ export default async function ApplicationPage() {
               <p className="font-medium">{application.address}</p>
             </div>
           </div>
+
+          {/* Experiences Section */}
+          {application.experiences && application.experiences.length > 0 && (
+            <>
+              <Separator />
+              <div>
+                <p className="text-sm text-muted-foreground mb-2">الخبرات والمهارات</p>
+                <div className="flex flex-wrap gap-2">
+                  {application.experiences.map((exp) => (
+                    <Badge key={exp} variant="secondary">
+                      {exp}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
 
           {application.decidedAt && (
             <>

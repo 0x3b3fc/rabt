@@ -29,24 +29,24 @@ export function UserHeader({ user, siteName = 'وحدة الربط المركز�
   }
 
   return (
-    <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b bg-card px-4 lg:px-6">
-      <Link href="/dashboard" className="flex items-center gap-3">
+    <header className="sticky top-0 z-50 flex h-14 sm:h-16 items-center justify-between border-b bg-card px-3 sm:px-4 lg:px-6">
+      <Link href="/dashboard" className="flex items-center gap-2 sm:gap-3">
         <Image
           src="/logo.png"
           alt="Logo"
-          width={50}
-          height={50}
-          className="rounded-lg"
+          width={40}
+          height={40}
+          className="rounded-lg sm:w-[50px] sm:h-[50px]"
         />
-        <span className="font-bold text-lg">{siteName}</span>
+        <span className="font-bold text-sm sm:text-lg truncate max-w-[120px] sm:max-w-[200px]">{siteName}</span>
       </Link>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-            <Avatar className="h-10 w-10">
+          <Button variant="ghost" className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-full">
+            <Avatar className="h-9 w-9 sm:h-10 sm:w-10">
               <AvatarFallback>
-                <User className="h-5 w-5" />
+                <User className="h-4 w-4 sm:h-5 sm:w-5" />
               </AvatarFallback>
             </Avatar>
           </Button>

@@ -19,7 +19,7 @@ export default async function UserLayout({ children }: { children: React.ReactNo
   return (
     <div className="min-h-screen flex flex-col">
       <UserHeader user={session.user} siteName={siteName} />
-      <main className="flex-1 container mx-auto p-4 lg:p-6">{children}</main>
+      <main className="flex-1 container mx-auto p-3 sm:p-4 lg:p-6">{children}</main>
     </div>
   )
 }

@@ -26,6 +26,7 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { ImageUpload } from '@/components/shared/image-upload'
+import { TagInput } from '@/components/shared/tag-input'
 import { applicationSchema, ApplicationInput } from '@/validations/application.schema'
 import { submitApplication } from '@/actions/application.actions'
 import { useToast } from '@/hooks/use-toast'
@@ -53,6 +54,8 @@ export function ApplicationForm({ governorates }: ApplicationFormProps) {
       address: '',
       photoUrl: '',
       nationalIdPhotoUrl: '',
+      nationalIdPhotoBackUrl: '',
+      experiences: [],
     },
   })
 
@@ -82,7 +85,7 @@ export function ApplicationForm({ governorates }: ApplicationFormProps) {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
             {error && (
               <Alert variant="destructive">
                 <AlertCircle className="h-4 w-4" />
@@ -90,13 +93,34 @@ export function ApplicationForm({ governorates }: ApplicationFormProps) {
               </Alert>
             )}
 
-            <div className="grid gap-6 md:grid-cols-2">
+            {/* Personal Photo */}
+            <FormField
+              control={form.control}
+              name="photoUrl"
+              render={({ field }) => (
+                <FormItem className="flex flex-col items-center">
+                  <FormLabel>الصورة الشخصية *</FormLabel>
+                  <FormControl>
+                    <ImageUpload
+                      value={field.value}
+                      onChange={field.onChange}
+                      disabled={isSubmitting}
+                    />
+                  </FormControl>
+                  <FormDescription>صورة شخصية واضحة</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* National ID Photos (Front & Back) */}
+            <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
               <FormField
                 control={form.control}
-                name="photoUrl"
+                name="nationalIdPhotoUrl"
                 render={({ field }) => (
                   <FormItem className="flex flex-col items-center">
-                    <FormLabel>الصورة الشخصية *</FormLabel>
+                    <FormLabel>وجه البطاقة *</FormLabel>
                     <FormControl>
                       <ImageUpload
                         value={field.value}
@@ -104,7 +128,7 @@ export function ApplicationForm({ governorates }: ApplicationFormProps) {
                         disabled={isSubmitting}
                       />
                     </FormControl>
-                    <FormDescription>صورة شخصية واضحة</FormDescription>
+                    <FormDescription>صورة واضحة لوجه البطاقة</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -112,10 +136,10 @@ export function ApplicationForm({ governorates }: ApplicationFormProps) {
 
               <FormField
                 control={form.control}
-                name="nationalIdPhotoUrl"
+                name="nationalIdPhotoBackUrl"
                 render={({ field }) => (
                   <FormItem className="flex flex-col items-center">
-                    <FormLabel>صورة البطاقة الشخصية *</FormLabel>
+                    <FormLabel>ظهر البطاقة *</FormLabel>
                     <FormControl>
                       <ImageUpload
                         value={field.value}
@@ -123,14 +147,14 @@ export function ApplicationForm({ governorates }: ApplicationFormProps) {
                         disabled={isSubmitting}
                       />
                     </FormControl>
-                    <FormDescription>صورة واضحة للبطاقة</FormDescription>
+                    <FormDescription>صورة واضحة لظهر البطاقة</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
               <FormField
                 control={form.control}
                 name="fullName"
@@ -270,6 +294,28 @@ export function ApplicationForm({ governorates }: ApplicationFormProps) {
                       {...field}
                     />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="experiences"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>الخبرات والمهارات *</FormLabel>
+                  <FormControl>
+                    <TagInput
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="اكتب المهارة ثم اضغط فاصلة أو Enter"
+                      disabled={isSubmitting}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    مثال: تصميم جرافيك، فوتوشوب، PHP، JavaScript
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

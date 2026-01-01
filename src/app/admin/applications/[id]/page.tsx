@@ -4,6 +4,7 @@ import { getAllUnits } from '@/actions/unit.actions'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { Badge } from '@/components/ui/badge'
 import { StatusBadge } from '@/components/shared/status-badge'
 import { ApplicationDecisionForm } from '@/components/forms/application-decision-form'
 import Link from 'next/link'
@@ -60,10 +61,10 @@ export default async function ApplicationDetailPage({
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Photos Section */}
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-3">
                 <div className="text-center">
                   <p className="text-sm text-muted-foreground mb-2">الصورة الشخصية</p>
-                  <div className="relative mx-auto w-32 h-32 rounded-lg overflow-hidden border bg-muted">
+                  <div className="relative mx-auto w-24 h-24 sm:w-32 sm:h-32 rounded-lg overflow-hidden border bg-muted">
                     {application.photoUrl ? (
                       <Image
                         src={application.photoUrl}
@@ -73,24 +74,41 @@ export default async function ApplicationDetailPage({
                       />
                     ) : (
                       <div className="flex items-center justify-center h-full">
-                        <User className="h-12 w-12 text-muted-foreground" />
+                        <User className="h-8 w-8 sm:h-12 sm:w-12 text-muted-foreground" />
                       </div>
                     )}
                   </div>
                 </div>
                 <div className="text-center">
-                  <p className="text-sm text-muted-foreground mb-2">صورة البطاقة</p>
-                  <div className="relative mx-auto w-48 h-32 rounded-lg overflow-hidden border bg-muted">
+                  <p className="text-sm text-muted-foreground mb-2">وجه البطاقة</p>
+                  <div className="relative mx-auto w-32 h-20 sm:w-40 sm:h-28 rounded-lg overflow-hidden border bg-muted">
                     {application.nationalIdPhotoUrl ? (
                       <Image
                         src={application.nationalIdPhotoUrl}
-                        alt="البطاقة الشخصية"
+                        alt="وجه البطاقة"
                         fill
                         className="object-cover"
                       />
                     ) : (
                       <div className="flex items-center justify-center h-full">
-                        <CreditCard className="h-12 w-12 text-muted-foreground" />
+                        <CreditCard className="h-8 w-8 sm:h-12 sm:w-12 text-muted-foreground" />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="text-center">
+                  <p className="text-sm text-muted-foreground mb-2">ظهر البطاقة</p>
+                  <div className="relative mx-auto w-32 h-20 sm:w-40 sm:h-28 rounded-lg overflow-hidden border bg-muted">
+                    {application.nationalIdPhotoBackUrl ? (
+                      <Image
+                        src={application.nationalIdPhotoBackUrl}
+                        alt="ظهر البطاقة"
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center h-full">
+                        <CreditCard className="h-8 w-8 sm:h-12 sm:w-12 text-muted-foreground" />
                       </div>
                     )}
                   </div>
@@ -156,6 +174,23 @@ export default async function ApplicationDetailPage({
                   </div>
                 </div>
               </div>
+
+              {/* Experiences Section */}
+              {application.experiences && application.experiences.length > 0 && (
+                <>
+                  <Separator />
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-2">الخبرات والمهارات</p>
+                    <div className="flex flex-wrap gap-2">
+                      {application.experiences.map((exp) => (
+                        <Badge key={exp} variant="secondary">
+                          {exp}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
 
               <Separator />
 

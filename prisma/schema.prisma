@@ -79,9 +79,11 @@ model Application {
   assignedUnitId     String?
   assignedUnit       Unit?             @relation("AssignedUnit", fields: [assignedUnitId], references: [id])
   adminNote          String?
-  photoUrl           String?
-  nationalIdPhotoUrl String?
-  submittedAt        DateTime          @default(now())
+  photoUrl               String?
+  nationalIdPhotoUrl     String?
+  nationalIdPhotoBackUrl String?
+  experiences            String[]
+  submittedAt            DateTime          @default(now())
   decidedAt          DateTime?
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt

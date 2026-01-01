@@ -62,7 +62,9 @@ export const applicationSchema = z.object({
     .min(10, { message: 'العنوان يجب أن يكون 10 أحرف على الأقل' })
     .max(200, { message: 'العنوان يجب ألا يتجاوز 200 حرف' }),
   photoUrl: z.string().min(1, { message: 'الصورة الشخصية مطلوبة' }),
-  nationalIdPhotoUrl: z.string().min(1, { message: 'صورة البطاقة مطلوبة' }),
+  nationalIdPhotoUrl: z.string().min(1, { message: 'صورة وجه البطاقة مطلوبة' }),
+  nationalIdPhotoBackUrl: z.string().min(1, { message: 'صورة ظهر البطاقة مطلوبة' }),
+  experiences: z.array(z.string()).min(1, { message: 'يجب إضافة خبرة واحدة على الأقل' }),
 })
 
 export const applicationDecisionSchema = z

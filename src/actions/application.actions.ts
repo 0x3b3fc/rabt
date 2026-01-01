@@ -55,6 +55,8 @@ export async function submitApplication(data: ApplicationInput) {
       address: validatedFields.data.address,
       photoUrl: validatedFields.data.photoUrl,
       nationalIdPhotoUrl: validatedFields.data.nationalIdPhotoUrl,
+      nationalIdPhotoBackUrl: validatedFields.data.nationalIdPhotoBackUrl,
+      experiences: validatedFields.data.experiences,
     },
   })
 
