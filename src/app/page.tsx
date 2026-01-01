@@ -42,8 +42,8 @@ export default async function HomePage() {
             <Image
               src="/logo.png"
               alt="Logo"
-              width={40}
-              height={40}
+              width={50}
+              height={50}
               className="rounded-lg"
             />
             <span className="font-bold text-xl">{siteName}</span>
@@ -82,8 +82,8 @@ export default async function HomePage() {
             <Image
               src="/logo.png"
               alt="Logo"
-              width={100}
-              height={100}
+              width={150}
+              height={150}
               className="mx-auto rounded-2xl mb-6"
             />
             <h1 className="text-4xl font-bold mb-4 lg:text-5xl">{siteName}</h1>

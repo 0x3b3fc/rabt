@@ -60,8 +60,8 @@ export function AdminSidebar({ siteName = 'وحدة الربط المركزي' }
           <Image
             src="/logo.png"
             alt="Logo"
-            width={40}
-            height={40}
+            width={50}
+            height={50}
             className="rounded-lg"
           />
           <span className="font-bold text-lg">{siteName}</span>
