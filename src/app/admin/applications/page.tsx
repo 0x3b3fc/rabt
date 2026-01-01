@@ -15,7 +15,7 @@ import { StatusBadge } from '@/components/shared/status-badge'
 import Link from 'next/link'
 import { format } from 'date-fns'
 import { ar } from 'date-fns/locale'
-import { Eye, Search, ChevronLeft, ChevronRight, User, Phone, MapPin, Calendar } from 'lucide-react'
+import { Eye, Search, ChevronLeft, ChevronRight, User, Phone, MapPin, Calendar, Download } from 'lucide-react'
 
 interface SearchParams {
   status?: string
@@ -67,9 +67,17 @@ export default async function ApplicationsPage({
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">الطلبات</h1>
-        <p className="text-muted-foreground">إدارة ومراجعة طلبات الانضمام</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold">الطلبات</h1>
+          <p className="text-muted-foreground">إدارة ومراجعة طلبات الانضمام</p>
+        </div>
+        <Button asChild variant="outline">
+          <a href="/api/admin/export/applications" download>
+            <Download className="h-4 w-4 ms-2" />
+            تصدير Excel
+          </a>
+        </Button>
       </div>
 
       {/* Filters */}
