@@ -144,34 +144,34 @@ export default async function ApplicationsPage({
             </p>
           ) : (
             <>
-              <div className="rounded-md border overflow-x-auto">
+              <div className="rounded-md border">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>الاسم</TableHead>
-                      <TableHead>الرقم القومي</TableHead>
-                      <TableHead>الهاتف</TableHead>
-                      <TableHead>المحافظة</TableHead>
-                      <TableHead>تاريخ التقديم</TableHead>
-                      <TableHead>الحالة</TableHead>
-                      <TableHead className="w-[80px]">إجراءات</TableHead>
+                      <TableHead className="whitespace-nowrap">الاسم</TableHead>
+                      <TableHead className="whitespace-nowrap">الرقم القومي</TableHead>
+                      <TableHead className="whitespace-nowrap">الهاتف</TableHead>
+                      <TableHead className="whitespace-nowrap">المحافظة</TableHead>
+                      <TableHead className="whitespace-nowrap">تاريخ التقديم</TableHead>
+                      <TableHead className="whitespace-nowrap">الحالة</TableHead>
+                      <TableHead className="whitespace-nowrap w-[70px]">إجراءات</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {applications.map((app) => (
                       <TableRow key={app.id}>
                         <TableCell>
-                          <div>
+                          <div className="min-w-[180px]">
                             <p className="font-medium">{app.fullName}</p>
                             <p className="text-sm text-muted-foreground">{app.user.email}</p>
                           </div>
                         </TableCell>
-                        <TableCell>
+                        <TableCell className="whitespace-nowrap">
                           <span className="font-mono" dir="ltr">{app.nationalId}</span>
                         </TableCell>
-                        <TableCell dir="ltr">{app.phone || '-'}</TableCell>
-                        <TableCell>{app.governorate.name}</TableCell>
-                        <TableCell>
+                        <TableCell className="whitespace-nowrap" dir="ltr">{app.phone || '-'}</TableCell>
+                        <TableCell className="whitespace-nowrap">{app.governorate.name}</TableCell>
+                        <TableCell className="whitespace-nowrap">
                           {format(new Date(app.submittedAt), 'dd/MM/yyyy', { locale: ar })}
                         </TableCell>
                         <TableCell>
