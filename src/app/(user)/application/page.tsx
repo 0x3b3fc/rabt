@@ -93,13 +93,15 @@ export default async function ApplicationPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid gap-4">
-              <div className="flex items-center gap-3">
-                <MapPin className="h-4 w-4 text-muted-foreground" />
-                <div>
-                  <p className="text-sm text-muted-foreground">المحافظة</p>
-                  <p className="font-medium">{application.assignedUnit.governorate.name}</p>
+              {application.assignedUnit.governorate && (
+                <div className="flex items-center gap-3">
+                  <MapPin className="h-4 w-4 text-muted-foreground" />
+                  <div>
+                    <p className="text-sm text-muted-foreground">المحافظة</p>
+                    <p className="font-medium">{application.assignedUnit.governorate.name}</p>
+                  </div>
                 </div>
-              </div>
+              )}
               <div className="flex items-center gap-3">
                 <Building2 className="h-4 w-4 text-muted-foreground" />
                 <div>

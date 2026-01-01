@@ -28,7 +28,7 @@ interface UnitActionsProps {
   unit: {
     id: string
     name: string
-    governorateId: string
+    governorateId: string | null
     whatsappLink: string | null
     address: string | null
     phone: string | null

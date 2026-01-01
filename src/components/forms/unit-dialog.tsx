@@ -33,7 +33,7 @@ interface UnitDialogProps {
   unit?: {
     id: string
     name: string
-    governorateId: string
+    governorateId: string | null
     whatsappLink: string | null
     address: string | null
     phone: string | null
@@ -59,12 +59,6 @@ export function UnitDialog({ children, governorates, unit }: UnitDialogProps) {
   const handleSubmit = async () => {
     setError(null)
 
-    // Validate required fields
-    if (!governorateId) {
-      setError('يجب اختيار المحافظة')
-      return
-    }
-
     if (!name.trim()) {
       setError('يجب إدخال اسم الوحدة')
       return
@@ -74,7 +68,7 @@ export function UnitDialog({ children, governorates, unit }: UnitDialogProps) {
 
     const data = {
       name: name.trim(),
-      governorateId,
+      governorateId: governorateId || undefined,
       whatsappLink: whatsappLink || undefined,
       address: address || undefined,
       phone: phone || undefined,
@@ -130,7 +124,7 @@ export function UnitDialog({ children, governorates, unit }: UnitDialogProps) {
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="governorate">المحافظة *</Label>
+            <Label htmlFor="governorate">المحافظة (اختياري)</Label>
             <Select value={governorateId} onValueChange={setGovernorateId} disabled={isSubmitting}>
               <SelectTrigger>
                 <SelectValue placeholder="اختر المحافظة" />
@@ -206,7 +200,7 @@ export function UnitDialog({ children, governorates, unit }: UnitDialogProps) {
           <Button variant="outline" onClick={() => setOpen(false)} disabled={isSubmitting}>
             إلغاء
           </Button>
-          <Button onClick={handleSubmit} disabled={!name || !governorateId || isSubmitting}>
+          <Button onClick={handleSubmit} disabled={!name || isSubmitting}>
             {isSubmitting ? (
               <>
                 <Loader2 className="ms-2 h-4 w-4 animate-spin" />

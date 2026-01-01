@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export const unitSchema = z.object({
-  governorateId: z.string().min(1, { message: 'المحافظة مطلوبة' }),
+  governorateId: z.string().optional().or(z.literal('')),
   name: z
     .string()
     .min(1, { message: 'اسم الوحدة مطلوب' })

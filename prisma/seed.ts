@@ -95,10 +95,7 @@ async function main() {
       for (const unit of units) {
         await prisma.unit.upsert({
           where: {
-            governorateId_name: {
-              governorateId: governorate.id,
-              name: unit.name,
-            },
+            name: unit.name,
           },
           update: {},
           create: {

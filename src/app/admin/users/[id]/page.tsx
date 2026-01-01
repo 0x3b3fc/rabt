@@ -100,7 +100,9 @@ export default async function UserDetailPage({
                   <div>
                     <p className="text-sm text-muted-foreground">الوحدة المسجل بها</p>
                     <p className="font-medium">{user.unit.name}</p>
-                    <p className="text-sm text-muted-foreground">{user.unit.governorate.name}</p>
+                    {user.unit.governorate && (
+                      <p className="text-sm text-muted-foreground">{user.unit.governorate.name}</p>
+                    )}
                   </div>
                 </div>
               </>
@@ -168,9 +170,11 @@ export default async function UserDetailPage({
                       <p className="text-sm text-muted-foreground mb-2">الوحدة المسجل بها</p>
                       <div className="p-3 bg-muted rounded-lg">
                         <p className="font-medium">{user.application.assignedUnit.name}</p>
-                        <p className="text-sm text-muted-foreground">
-                          {user.application.assignedUnit.governorate.name}
-                        </p>
+                        {user.application.assignedUnit.governorate && (
+                          <p className="text-sm text-muted-foreground">
+                            {user.application.assignedUnit.governorate.name}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </>

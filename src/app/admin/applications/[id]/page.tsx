@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { getApplicationById } from '@/actions/application.actions'
-import { getUnitsByGovernorate } from '@/actions/unit.actions'
+import { getAllUnits } from '@/actions/unit.actions'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -24,7 +24,7 @@ export default async function ApplicationDetailPage({
     notFound()
   }
 
-  const units = await getUnitsByGovernorate(application.governorateId, false)
+  const units = await getAllUnits(false)
 
   const formatDate = (date: Date) => {
     return format(new Date(date), 'dd MMMM yyyy', { locale: ar })
@@ -148,9 +148,11 @@ export default async function ApplicationDetailPage({
                     <p className="text-sm text-muted-foreground mb-2">الوحدة المسجل بها</p>
                     <div className="p-4 bg-muted rounded-lg">
                       <p className="font-medium">{application.assignedUnit.name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {application.assignedUnit.governorate.name}
-                      </p>
+                      {application.assignedUnit.governorate && (
+                        <p className="text-sm text-muted-foreground">
+                          {application.assignedUnit.governorate.name}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </>
@@ -177,7 +179,6 @@ export default async function ApplicationDetailPage({
             currentUnitId={application.assignedUnitId}
             currentNote={application.adminNote}
             units={units}
-            governorateName={application.governorate.name}
           />
         </div>
       </div>

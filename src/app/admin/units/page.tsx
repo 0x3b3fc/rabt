@@ -111,7 +111,7 @@ export default async function UnitsPage({
                           )}
                         </div>
                       </TableCell>
-                      <TableCell>{unit.governorate.name}</TableCell>
+                      <TableCell>{unit.governorate?.name || '-'}</TableCell>
                       <TableCell dir="ltr">{unit.phone || '-'}</TableCell>
                       <TableCell>
                         {unit.whatsappLink ? (

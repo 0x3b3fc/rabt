@@ -22,18 +22,17 @@ export async function createUnit(data: UnitInput) {
 
   const existingUnit = await prisma.unit.findFirst({
     where: {
-      governorateId: validatedFields.data.governorateId,
       name: validatedFields.data.name,
     },
   })
 
   if (existingUnit) {
-    return { error: 'اسم الوحدة موجود بالفعل في هذه المحافظة' }
+    return { error: 'اسم الوحدة موجود بالفعل' }
   }
 
   await prisma.unit.create({
     data: {
-      governorateId: validatedFields.data.governorateId,
+      governorateId: validatedFields.data.governorateId || null,
       name: validatedFields.data.name,
       whatsappLink: validatedFields.data.whatsappLink || null,
       address: validatedFields.data.address || null,
@@ -63,20 +62,19 @@ export async function updateUnit(id: string, data: UnitInput) {
 
   const existingUnit = await prisma.unit.findFirst({
     where: {
-      governorateId: validatedFields.data.governorateId,
       name: validatedFields.data.name,
       NOT: { id },
     },
   })
 
   if (existingUnit) {
-    return { error: 'اسم الوحدة موجود بالفعل في هذه المحافظة' }
+    return { error: 'اسم الوحدة موجود بالفعل' }
   }
 
   await prisma.unit.update({
     where: { id },
     data: {
-      governorateId: validatedFields.data.governorateId,
+      governorateId: validatedFields.data.governorateId || null,
       name: validatedFields.data.name,
       whatsappLink: validatedFields.data.whatsappLink || null,
       address: validatedFields.data.address || null,
@@ -174,6 +172,16 @@ export async function getUnitsByGovernorate(governorateId: string, activeOnly = 
     where: {
       governorateId,
       ...(activeOnly ? { isActive: true } : {}),
+    },
+    orderBy: { name: 'asc' },
+  })
+}
+
+export async function getAllUnits(activeOnly = true) {
+  return prisma.unit.findMany({
+    where: activeOnly ? { isActive: true } : {},
+    include: {
+      governorate: true,
     },
     orderBy: { name: 'asc' },
   })

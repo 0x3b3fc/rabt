@@ -48,9 +48,9 @@ model Governorate {
 
 model Unit {
   id            String        @id @default(cuid())
-  governorateId String
-  governorate   Governorate   @relation(fields: [governorateId], references: [id], onDelete: Cascade)
-  name          String
+  governorateId String?
+  governorate   Governorate?  @relation(fields: [governorateId], references: [id], onDelete: SetNull)
+  name          String        @unique
   whatsappLink  String?
   address       String?
   phone         String?
@@ -60,7 +60,6 @@ model Unit {
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 
-  @@unique([governorateId, name])
   @@map("units")
 }
 
