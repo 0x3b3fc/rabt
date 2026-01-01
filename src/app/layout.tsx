@@ -12,6 +12,10 @@ const cairo = Cairo({
 export const metadata: Metadata = {
   title: 'وحدة الربط المركزي',
   description: 'منصة إدارة طلبات الانضمام للنقابة',
+  icons: {
+    icon: '/logo.png',
+    apple: '/logo.png',
+  },
 }
 
 export default function RootLayout({

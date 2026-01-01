@@ -1,14 +1,18 @@
-import { Building2 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col">
       <header className="flex h-16 items-center justify-center border-b bg-card px-4">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Building2 className="h-5 w-5" />
-          </div>
+        <Link href="/" className="flex items-center gap-3">
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={40}
+            height={40}
+            className="rounded-lg"
+          />
           <span className="font-bold text-lg">وحدة الربط المركزي</span>
         </Link>
       </header>

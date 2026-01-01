@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import {
@@ -55,10 +56,14 @@ export function AdminSidebar({ siteName = 'وحدة الربط المركزي' }
   return (
     <aside className="hidden lg:flex w-64 flex-col border-l bg-card">
       <div className="flex h-16 items-center border-b px-6">
-        <Link href="/admin/dashboard" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Building2 className="h-5 w-5" />
-          </div>
+        <Link href="/admin/dashboard" className="flex items-center gap-3">
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={40}
+            height={40}
+            className="rounded-lg"
+          />
           <span className="font-bold text-lg">{siteName}</span>
         </Link>
       </div>

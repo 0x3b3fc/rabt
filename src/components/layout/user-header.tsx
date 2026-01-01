@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -12,7 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { logout } from '@/actions/auth.actions'
-import { LogOut, User, Building2 } from 'lucide-react'
+import { LogOut, User } from 'lucide-react'
 
 interface UserHeaderProps {
   user: {
@@ -29,10 +30,14 @@ export function UserHeader({ user, siteName = 'وحدة الربط المركز�
 
   return (
     <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b bg-card px-4 lg:px-6">
-      <Link href="/dashboard" className="flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-          <Building2 className="h-5 w-5" />
-        </div>
+      <Link href="/dashboard" className="flex items-center gap-3">
+        <Image
+          src="/logo.png"
+          alt="Logo"
+          width={40}
+          height={40}
+          className="rounded-lg"
+        />
         <span className="font-bold text-lg">{siteName}</span>
       </Link>
 

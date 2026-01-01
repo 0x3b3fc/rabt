@@ -1,9 +1,10 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { getSettings } from '@/actions/settings.actions'
 import { auth } from '@/lib/auth'
-import { Building2, UserPlus, LogIn, CheckCircle, FileText, Users } from 'lucide-react'
+import { UserPlus, LogIn, CheckCircle, FileText, Users } from 'lucide-react'
 
 export default async function HomePage() {
   const session = await auth()
@@ -37,10 +38,14 @@ export default async function HomePage() {
       {/* Header */}
       <header className="border-b bg-card">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Building2 className="h-6 w-6" />
-            </div>
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={40}
+              height={40}
+              className="rounded-lg"
+            />
             <span className="font-bold text-xl">{siteName}</span>
           </Link>
           <nav className="flex items-center gap-2">
@@ -74,9 +79,13 @@ export default async function HomePage() {
       <section className="flex-1 flex items-center justify-center bg-gradient-to-b from-background to-muted/30 px-4 py-16">
         <div className="container mx-auto text-center max-w-4xl">
           <div className="mb-8">
-            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-primary text-primary-foreground mb-6">
-              <Building2 className="h-10 w-10" />
-            </div>
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={100}
+              height={100}
+              className="mx-auto rounded-2xl mb-6"
+            />
             <h1 className="text-4xl font-bold mb-4 lg:text-5xl">{siteName}</h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               {welcomeMessage}
