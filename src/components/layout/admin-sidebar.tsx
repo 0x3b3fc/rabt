@@ -55,16 +55,16 @@ export function AdminSidebar({ siteName = 'وحدة الربط المركزي' }
 
   return (
     <aside className="hidden lg:flex w-64 flex-col border-l bg-card">
-      <div className="flex h-16 items-center border-b px-6">
-        <Link href="/admin/dashboard" className="flex items-center gap-3">
+      <div className="border-b p-4">
+        <Link href="/admin/dashboard" className="flex flex-col items-center gap-2 text-center">
           <Image
             src="/logo.png"
             alt="Logo"
-            width={50}
-            height={50}
+            width={60}
+            height={60}
             className="rounded-lg"
           />
-          <span className="font-bold text-lg">{siteName}</span>
+          <span className="font-bold text-sm leading-tight">{siteName}</span>
         </Link>
       </div>
       <nav className="flex-1 space-y-1 p-4">
